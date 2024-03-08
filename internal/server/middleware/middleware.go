@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/AmosSParker/Slud9e/internal/server/utils" // Logging Library
-	"github.com/didip/tollbooth"                          // Rate limiting library
-	"github.com/go-playground/validator/v10"              // Input validation library
+	"github.com/AmosSParker/Slud9e/internal/utils"
+	"github.com/didip/tollbooth"
+	"github.com/go-playground/validator/v10"
 )
 
 type UserRegistrationRequest struct {

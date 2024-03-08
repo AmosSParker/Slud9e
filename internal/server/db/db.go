@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/AmosSParker/Slud9e/internal/server/config"
-	"github.com/AmosSParker/Slud9e/internal/server/utils"
+	"github.com/AmosSParker/Slud9e/internal/utils"
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"

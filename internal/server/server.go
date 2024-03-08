@@ -11,7 +11,7 @@ import (
 	"github.com/AmosSParker/Slud9e/internal/server/db"
 	"github.com/AmosSParker/Slud9e/internal/server/handlers"
 	"github.com/AmosSParker/Slud9e/internal/server/middleware"
-	"github.com/AmosSParker/Slud9e/internal/server/utils"
+	"github.com/AmosSParker/Slud9e/internal/utils"
 	"github.com/go-playground/validator/v10"
 	"github.com/gorilla/mux"
 )

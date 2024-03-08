@@ -12,7 +12,7 @@ import (
 
 	"github.com/AmosSParker/Slud9e/internal/server/config"
 	"github.com/AmosSParker/Slud9e/internal/server/db"
-	"github.com/AmosSParker/Slud9e/internal/server/utils"
+	"github.com/AmosSParker/Slud9e/internal/utils"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/golang-jwt/jwt/v4"
 )

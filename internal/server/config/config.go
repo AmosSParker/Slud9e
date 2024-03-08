@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/AmosSParker/slud9e/internal/server/utils"
+	"github.com/AmosSParker/Slud9e/internal/utils"
 )
 
 type Config struct {
