@@ -2,15 +2,24 @@ package middleware
 
 import (
 	"compress/gzip"
+	"context"
 	"encoding/json"
 	"net/http"
 	"strings"
 	"time"
 
+	"github.com/AmosSParker/Slud9e/internal/config"
 	"github.com/AmosSParker/Slud9e/internal/utils"
 	"github.com/didip/tollbooth"
 	"github.com/go-playground/validator/v10"
+	"github.com/dgrijalva/jwt-go"
 )
+
+// UserRegistrationRequest represents the structure of a user registration request.
+type UserRegistrationRequest struct {
+	Email    string `validate:"required,email"`
+	Password string `validate:"required,min=8"`
+}
 
 // StructuredLoggingMiddleware logs each HTTP request with structured logging.
 func StructuredLoggingMiddleware(next http.Handler) http.Handler {
@@ -106,7 +115,8 @@ func AuthMiddleware(next http.Handler) http.Handler {
 
 // RateLimitingMiddleware limits the rate of incoming requests using the tollbooth library.
 func RateLimitingMiddleware(next http.Handler) http.Handler {
-	limiter := tollbooth.NewLimiter(1, nil) // 1 request per second
+	cfg := config.GetInstance()
+	limiter := tollbooth.NewLimiter(cfg.RateLimitRequests, &limiter.ExpirableOptions{DefaultExpirationTTL: cfg.RateLimitDuration})
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		httpError := tollbooth.LimitByRequest(limiter, w, r)
 		if httpError != nil {
@@ -134,10 +144,11 @@ func ErrorHandlingMiddleware(next http.Handler) http.Handler {
 
 // SecureHeadersMiddleware adds security-related headers to responses.
 func SecureHeadersMiddleware(next http.Handler) http.Handler {
+	cfg := config.GetInstance()
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("X-Frame-Options", "DENY")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
-		w.Header().Set("Content-Security-Policy", "default-src 'self'")
+		w.Header().Set("X-Frame-Options", cfg.SecurityHeadersConfig.CSP)
+		w.Header().Set("X-Content-Type-Options", cfg.SecurityHeadersConfig.CORS)
+		w.Header().Set("Content-Security-Policy", cfg.SecurityHeadersConfig.CORS)
 		next.ServeHTTP(w, r)
 	})
 }
