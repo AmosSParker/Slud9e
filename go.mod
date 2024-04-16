@@ -1,9 +1,8 @@
-module Slud9e
+module github.com/AmosSParker/Slud9e
 
 go 1.19
 
 require (
-	github.com/AmosSParker/Slud9e v0.0.0-20240308143031-8d6bd4ebd0df
 	github.com/didip/tollbooth v4.0.2+incompatible
 	github.com/go-playground/validator/v10 v10.19.0
 	github.com/gorilla/mux v1.8.1
